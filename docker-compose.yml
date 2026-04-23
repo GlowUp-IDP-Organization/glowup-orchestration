@@ -28,7 +28,24 @@ services:
     depends_on:
       - main-db
 
+  # Utilitar pentru gestiunea din UI a clusterului
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: glowup_portainer
+    ports:
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    networks:
+      - backend-nw
+    restart: always
+
 # Definirea rețelelor conform arhitecturii
 networks:
   frontend-nw:
   backend-nw:
+
+# Salvarea persistentă a datelor
+volumes:
+  portainer_data:
