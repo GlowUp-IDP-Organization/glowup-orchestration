@@ -1,0 +1,17 @@
+stages:
+  - build
+  - test
+
+build-auth-image:
+  stage: build
+  image: docker:24.0.5
+  services:
+    - docker:24.0.5-dind
+  script:
+    - echo "Aici se va construi imaginea Docker pentru Auth MS..."
+
+test-logic:
+  stage: test
+  image: python:3.11-slim
+  script:
+    - echo "Aici se vor rula testele unitare pentru algoritmii de skincare..."
