@@ -1,0 +1,20 @@
+_format_version: "3.0"
+services:
+  - name: auth-service
+    url: http://glowup_auth:4000
+    routes:
+      - name: auth-route
+        paths:
+          - /auth
+  - name: logic-service
+    url: http://glowup_logic:8000
+    routes:
+      - name: logic-route
+        paths:
+          - /logic
+  - name: io-service
+    url: http://glowup_io:3000
+    routes:
+      - name: io-route
+        paths:
+          - /io

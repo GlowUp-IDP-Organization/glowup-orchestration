@@ -66,6 +66,24 @@ services:
     depends_on:
       - prometheus
 
+  # API Gateway
+  kong:
+    image: kong:latest
+    container_name: glowup_kong
+    environment:
+      - KONG_DATABASE=off
+      - KONG_DECLARATIVE_CONFIG=/etc/kong/kong.yml
+      - KONG_PROXY_ACCESS_LOG=/dev/stdout
+      - KONG_PROXY_ERROR_LOG=/dev/stderr
+      - KONG_PROXY_LISTEN=0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./kong.yml:/etc/kong/kong.yml
+    networks:
+      - backend-nw
+      - frontend-nw
+
 # Definirea rețelelor conform arhitecturii
 networks:
   frontend-nw:
