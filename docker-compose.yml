@@ -4,7 +4,6 @@ services:
   # Baza de date principală (Main DB)
   main-db:
     image: postgres:15
-    container_name: glowup_main_db
     environment:
       POSTGRES_USER: glowup_user
       POSTGRES_PASSWORD: glowup_password
@@ -17,7 +16,6 @@ services:
   # Utilitarul de gestiune a bazei de date
   pgadmin:
     image: dpage/pgadmin4
-    container_name: glowup_pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@glowup.com
       PGADMIN_DEFAULT_PASSWORD: admin_password
@@ -25,13 +23,10 @@ services:
       - backend-nw
     ports:
       - "5050:80"
-    depends_on:
-      - main-db
 
   # Utilitar pentru gestiunea din UI a clusterului
   portainer:
     image: portainer/portainer-ce:latest
-    container_name: glowup_portainer
     ports:
       - "9000:9000"
     volumes:
@@ -39,12 +34,13 @@ services:
       - portainer_data:/data
     networks:
       - backend-nw
-    restart: always
+    deploy:
+      restart_policy:
+        condition: on-failure
 
   # Sistem de colectare metrici (Prometheus)
   prometheus:
     image: prom/prometheus:latest
-    container_name: glowup_prometheus
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
@@ -55,7 +51,6 @@ services:
   # Dashboard pentru observabilitate (Grafana)
   grafana:
     image: grafana/grafana:latest
-    container_name: glowup_grafana
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=glowup_grafana
@@ -63,13 +58,10 @@ services:
       - "3001:3000"
     networks:
       - backend-nw
-    depends_on:
-      - prometheus
 
   # API Gateway
   kong:
     image: kong:latest
-    container_name: glowup_kong
     environment:
       - KONG_DATABASE=off
       - KONG_DECLARATIVE_CONFIG=/etc/kong/kong.yml
@@ -123,8 +115,6 @@ services:
       - DB_NAME=glowup_db
     networks:
       - backend-nw
-    depends_on:
-      - main-db
     deploy:
       replicas: 2
       resources:
