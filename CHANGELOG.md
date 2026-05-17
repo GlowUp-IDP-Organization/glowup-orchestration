@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2026-05-17
 
 ### Added
-- **[glowup-orchestration]** - Adăugare pipeline de automatizare GitHub Actions (`.github/workflows/ci.yml`) pentru validarea sintaxei de infrastructură (Anca).
+- **[glowup-frontend]** - Implementarea unui Centru de Notificări și Alerte active (In-App Pull Notifications) în Dashboard, care calculează dinamic timpul rămas până la expirare și avertizează vizual utilizatorul (Anca & Anda).
 - **[glowup-frontend]** - Crearea unei interfețe grafice interactive de tip MVP folosind Streamlit, structurată pe 5 tab-uri corespunzătoare specificațiilor din temă (Anca & Anda).
 - **[glowup-frontend]** - Eliminarea totală a problemelor de politică CORS prin asigurarea comunicației directe server-to-server (Anca & Anda).
 - **[glowup-logic]** - Implementarea algoritmului de generare rutină inteligentă `GET /logic/generate-routine/:username` cu sortare clinică bazată pe consistență și pH (Anda).
@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **[glowup-io]** - Implementarea endpoint-ului `POST /io/shelf` cu clauză de auto-creare profil (`upsert`) pentru eliminarea conflictelor de cheie străină (Anda).
 - **[glowup-io]** - Implementarea endpoint-ului `GET /io/shelf/:username` pentru calcularea dinamică a termenelor de valabilitate (PAO) direct din baza de date (Anda).
 - **[glowup-auth]** - Actualizarea rutei `POST /auth/register` pentru a colecta dinamic proprietățile tenului și a le injecta criptat în token-ul JWT (Anca).
+- **[glowup-orchestration]** - Adăugare pipeline de automatizare GitHub Actions (`.github/workflows/ci.yml`) pentru validarea sintaxei de infrastructură (Anca).
 
 ### Changed
 - **[glowup-orchestration]** - Adaptarea fișierului `docker-compose.yml` pentru conformitate strictă cu standardul Docker Swarm prin eliminarea proprietăților incompatibile în cluster (Anca).
