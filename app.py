@@ -98,8 +98,31 @@ with tab3:
                 if not items:
                     st.warning("Raftul tău este gol momentan. Adaugă produse din Tab-ul anterior.")
                 else:
+                    # --- 🔔 CENTRUL DE NOTIFICĂRI ȘI ALERTE ACTIVE ---
+                    st.subheader("🔔 Centru de Notificări și Alerte")
+                    from datetime import datetime
+                    
+                    alerts_triggered = 0
                     for item in items:
-                        # Curățăm formatul datei pentru un aspect vizual premium
+                        exp_date = item['expiry_date'].split("T")[0]
+                        exp_dt = datetime.strptime(exp_date, "%Y-%m-%d").date()
+                        today = datetime.now().date()
+                        days_left = (exp_dt - today).days
+                        
+                        # Alerte pentru produse care expiră în mai puțin de 185 de zile
+                        # (Perfect pentru a prinde produsele de 6 luni adăugate astăzi în demo!)
+                        if days_left <= 185:
+                            st.warning(f"⚠️ **NOTIFICARE EXPIRARE:** Produsul tău **{item['name']}** are o valabilitate scurtă! Mai are doar **{days_left} zile** până la expirare.")
+                            alerts_triggered += 1
+                    
+                    if alerts_triggered == 0:
+                        st.success("🎉 Sistemul de alertă: Toate produsele tale sunt în termenul optim de valabilitate!")
+                    
+                    st.markdown("---")
+                    st.subheader("📦 Dashboard-ul de Inventar")
+                    
+                    # Afișarea grafică a produselor
+                    for item in items:
                         exp_date = item['expiry_date'].split("T")[0]
                         st.metric(
                             label=f"🧴 {item['name']} ({item['category'].capitalize()})", 
