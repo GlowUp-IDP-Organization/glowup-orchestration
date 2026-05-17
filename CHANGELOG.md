@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2026-05-17
 
 ### Added
+- **[glowup-orchestration]** - Adăugare pipeline de automatizare GitHub Actions (`.github/workflows/ci.yml`) pentru validarea sintaxei de infrastructură (Anca).
 - **[glowup-frontend]** - Crearea unei interfețe grafice interactive de tip MVP folosind Streamlit, structurată pe 5 tab-uri corespunzătoare specificațiilor din temă (Anca & Anda).
 - **[glowup-frontend]** - Eliminarea totală a problemelor de politică CORS prin asigurarea comunicației directe server-to-server (Anca & Anda).
 - **[glowup-logic]** - Implementarea algoritmului de generare rutină inteligentă `GET /logic/generate-routine/:username` cu sortare clinică bazată pe consistență și pH (Anda).
@@ -26,7 +27,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - **[glowup-orchestration]** - Trecerea la arhitectura de producție Docker Swarm prin orchestrarea microserviciilor custom, configurarea replicilor multiple și setarea limitelor hardware (Anca).
-- **[glowup-orchestration]** - Adăugare pipeline de automatizare GitLab CI/CD `.gitlab-ci.yml` pentru automatizarea etapelor de build și test (Anca).
 - **[glowup-logic]** - Implementare algoritm de business pentru detectarea incompatibilităților severe de skincare în sesiuni simultane (ex: Retinol + AHA/BHA) (Anda).
 - **[glowup-logic]** - Implementarea comunicării HTTP interne asincrone pentru interogarea directă a serviciului de date (Anda).
 - **[glowup-logic]** - Optimizarea procesului de containerizare prin curățarea dependențelor specifice sistemului gazdă din `requirements.txt` (Anda).
