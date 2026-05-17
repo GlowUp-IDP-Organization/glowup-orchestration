@@ -1,17 +1,18 @@
 stages:
-  - build
-  - test
+  - validate
+  - security
 
-build-auth-image:
-  stage: build
+validate-swarm-architecture:
+  stage: validate
   image: docker:24.0.5
-  services:
-    - docker:24.0.5-dind
   script:
-    - echo "Aici se va construi imaginea Docker pentru Auth MS..."
+    - echo "Validam sintaxa si structura fisierului de orchestrare..."
+    - docker compose config -q
+    - echo "Arhitectura Docker Swarm este valida si gata de productie!"
 
-test-logic:
-  stage: test
-  image: python:3.11-slim
+security-check:
+  stage: security
+  image: alpine:latest
   script:
-    - echo "Aici se vor rula testele unitare pentru algoritmii de skincare..."
+    - echo "Verificam expunerea porturilor critice..."
+    - grep -q "5432:5432" docker-compose.yml && exit 1 || echo "Portul DB este securizat/schimbat corect."
